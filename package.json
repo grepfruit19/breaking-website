@@ -1,0 +1,19 @@
+{
+  "name": "breakingapp",
+  "version": "1.0.0",
+  "description": "Allows breakers and crews to register themselves, also allows for event creation and management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyu-csci-ua-0480-001-fall-2016/wtk219-homework06.git"
+  },
+  "author": "William Kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nyu-csci-ua-0480-001-fall-2016/wtk219-homework06/issues"
+  },
+  "homepage": "https://github.com/nyu-csci-ua-0480-001-fall-2016/wtk219-homework06#readme"
+}
