@@ -12,16 +12,15 @@ router.get('/', function(req, res, next) {
 
 router.get('/breakers', function(req,res,next){
   var filter = req.query.filter;
-  console.log(req.query.filter);
+  //console.log(req.query.filter);
   if (req.query.filter===undefined){
     filter = {};
   }
   else{
     filter = {breakerName: filter};
   }
-  console.log(filter);
+  //console.log(filter);
   Breaker.find(filter, function(err,breakerList,count){
-
     res.render('breakers', {breaker: breakerList});
   });
 });
