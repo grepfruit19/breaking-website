@@ -9,6 +9,16 @@ var Breaker = new mongoose.Schema({
   crew: String
 });
 
+var Event = new mongoose.Schema({
+  address: {type: String, required:true},
+  eventDate: {type: String, required:true},
+  prizeMoney: {type: Number, required:true},
+  judges: [Breaker],
+  participants: [Breaker],
+  format: {type: String, required:true},
+  details: String
+});
+
 // is the environment variable, NODE_ENV, set to PRODUCTION?
 if (process.env.NODE_ENV == 'PRODUCTION') {
  // if we're in PRODUCTION mode, then read the configration from a file
@@ -28,9 +38,11 @@ if (process.env.NODE_ENV == 'PRODUCTION') {
 }
 
 mongoose.model('Breaker', Breaker);
+mongoose.model('Event', Event);
 
 mongoose.connect(dbconf);
 
 module.exports = {
   Breaker: Breaker,
+  Event: Event,
 }
