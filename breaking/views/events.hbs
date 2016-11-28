@@ -1,0 +1,12 @@
+<h2>List of Events</h2>
+
+<form action="events" method="GET">
+  Filter by name: <input type="text" name="filter">
+  <input type="submit">
+</form>
+
+<ul>
+{{#each jam}}
+  <li>{{this.name}} - {{this.address}} - {{this.eventDate}}</li>
+{{/each}}
+</ul>

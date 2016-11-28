@@ -11,7 +11,19 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/events', function(req,res,next){
-
+  var filter = req.query.filter;
+  //console.log(req.query.filter);
+  if (req.query.filter===undefined){
+    filter = {};
+  }
+  else{
+    filter = {name: filter};
+  }
+  //console.log(filter);
+  Jam.find(filter, function(err,jamList,count){
+    res.render('events', {jam: jamList});
+  });
+  res.render('events');
 });
 
 router.get('/breakers', function(req,res,next){
@@ -29,6 +41,15 @@ router.get('/breakers', function(req,res,next){
   });
 });
 
+router.get('/breakers/:slug', function(req,res,next){
+  var slug = req.params.slug;
+  Breaker.findOne({slug: slug}, function(err,breaker,count){
+    console.log(breaker);
+    var breakerName = breaker.breakerName;
+    res.render('breaker-page', breaker);
+  });
+});
+
 router.get('/register/breaker',function(req,res,next){
   console.log("found breaker");
   res.render('breakersregistration');
@@ -40,10 +61,12 @@ router.post('/register/process-breaker',function(req,res,next){
     password: req.body.password,
     breakerName: req.body.breakerName,
     location: req.body.location,
-    crew: req.body.crew
+    crew: req.body.crew,
+    bio: req.body.crew
   });
   newBreaker.save(function(err,breaker,count){
     if (err===null){
+      console.log("Saved breaker");
       res.redirect('/breakers');
     }
     else{
@@ -57,22 +80,24 @@ router.get('/register/event', function(req,res,next){
 });
 
 router.post('/register/process-event', function(req,res,next){
-  console.log(req.body.date);
-  var newEvent = Event({
+    var newEvent = Jam({
+    name: req.body.name,
     address: req.body.address,
     date: req.body.date,
-    prizeMoney: parseInt(req.body.prizeMoney),
+    prizeMoney: req.body.prizeMoney,
     format: req.body.format,
     details: req.body.details
   });
+  console.log("hello", newEvent);
   newEvent.save(function(err,evt,count){
     if (err===null){
+      console.log("Saved event");
       res.redirect('/events');
     }
     else{
       console.log("Error processing event");
     }
-  })
+  });
 });
 
 module.exports = router;

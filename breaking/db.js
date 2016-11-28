@@ -1,23 +1,27 @@
 var mongoose = require('mongoose')
-// URLSlugs = require('mongoose-url-slugs');
+var URLSlugs = require('mongoose-url-slugs');
 
 var Breaker = new mongoose.Schema({
   username: String,
   password: String,
   breakerName: String,
   location: String,
-  crew: String
+  crew: String,
+  bio: String
 });
+Breaker.plugin(URLSlugs('breakerName crew'));
 
-var Event = new mongoose.Schema({
-  address: {type: String, required:true},
-  eventDate: {type: String, required:true},
-  prizeMoney: {type: Number, required:true},
+var Jam = new mongoose.Schema({
+  name: String,
+  address: String,
+  eventDate: String,
+  prizeMoney: String,
   judges: [Breaker],
   participants: [Breaker],
-  format: {type: String, required:true},
+  format: String,
   details: String
 });
+Jam.plugin(URLSlugs('title'));
 
 // is the environment variable, NODE_ENV, set to PRODUCTION?
 if (process.env.NODE_ENV == 'PRODUCTION') {
@@ -38,11 +42,11 @@ if (process.env.NODE_ENV == 'PRODUCTION') {
 }
 
 mongoose.model('Breaker', Breaker);
-mongoose.model('Event', Event);
+mongoose.model('Jam', Jam);
 
 mongoose.connect(dbconf);
 
 module.exports = {
   Breaker: Breaker,
-  Event: Event,
+  Jam: Jam,
 }

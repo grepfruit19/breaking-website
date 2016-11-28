@@ -7,6 +7,6 @@
 
 <ul>
 {{#each breaker}}
-  <li>{{this.breakerName}} - {{this.location}} - {{this.crew}}</li>
+  <li><a href="/breakers/{{this.slug}}">{{this.breakerName}}</a> - {{this.location}} - {{this.crew}}</li>
 {{/each}}
 </ul>
