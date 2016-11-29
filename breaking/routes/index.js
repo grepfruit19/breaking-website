@@ -63,50 +63,24 @@ router.get('/register/breaker',function(req,res,next){
 });
 
 router.post('/register/process-breaker',function(req,res,next){
-  Breaker.register(new Breaker({username:req.body.username}),
+  var newBreaker = Breaker({
+    username: req.body.username,
+    breakerName: req.body.breakerName,
+    location: req.body.location,
+    crew: req.body.crew,
+    bio: req.body.crew
+  });
+  Breaker.register(newBreaker,
     req.body.password, function(err,user){
       if (err){
         //render some sort of error page
         console.log("Error registering user");
       } else {
         passport.authenticate('local')(req,res,function(){
-          var newBreaker = Breaker({
-            breakerName: req.body.breakerName,
-            location: req.body.location,
-            crew: req.body.crew,
-            bio: req.body.crew
-          });
-          newBreaker.save(function(err,breaker,count){
-            if (err===null){
-              console.log("Saved breaker");
-              res.redirect('/breakers');
-            }
-            else{
-              console.log("Error saving breaker");
-            }
-          });
+          res.redirect('/breakers');
         });
       }
     });
-    /*
-  var newBreaker = Breaker({
-    username: req.body.username,
-    password: req.body.password,
-    breakerName: req.body.breakerName,
-    location: req.body.location,
-    crew: req.body.crew,
-    bio: req.body.crew
-  });
-  newBreaker.save(function(err,breaker,count){
-    if (err===null){
-      console.log("Saved breaker");
-      res.redirect('/breakers');
-    }
-    else{
-      console.log("Error saving breaker");
-    }
-  });
-  */
 });
 
 router.get('/register/event', function(req,res,next){
@@ -117,7 +91,7 @@ router.post('/register/process-event', function(req,res,next){
     var newEvent = Jam({
     name: req.body.name,
     address: req.body.address,
-    date: req.body.date,
+    eventDate: req.body.date,
     prizeMoney: req.body.prizeMoney,
     format: req.body.format,
     details: req.body.details
@@ -130,8 +104,13 @@ router.post('/register/process-event', function(req,res,next){
     }
     else{
       console.log("Error processing event");
+      return handleError(err);
     }
   });
+});
+
+router.get('/login', function(req,res,next){
+  res.render('login');
 });
 
 router.post('/login', function(req,res,next){
@@ -145,6 +124,11 @@ router.post('/login', function(req,res,next){
       console.log("Error at login");
     }
   })(req,res,next);
+});
+
+router.get('/logout', function(req,res,next){
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = router;

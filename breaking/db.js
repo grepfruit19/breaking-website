@@ -21,7 +21,7 @@ var Jam = new mongoose.Schema({
   format: String,
   details: String
 });
-Jam.plugin(URLSlugs('title'));
+Jam.plugin(URLSlugs('name eventDate'));
 
 // is the environment variable, NODE_ENV, set to PRODUCTION?
 if (process.env.NODE_ENV == 'PRODUCTION') {
