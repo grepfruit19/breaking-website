@@ -36,7 +36,9 @@
   		</div>
   	</div>
   </nav>
-
+  {{#if user}}
+  Logged in as {{user.username}}
+  {{/if}}
   <h1>New York Breaking League</h1>
     {{{body}}}
   </body>

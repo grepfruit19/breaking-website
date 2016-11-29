@@ -1,15 +1,15 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var passportLocalMongoose = require('passport-local-mongoose');
 var URLSlugs = require('mongoose-url-slugs');
 
 var Breaker = new mongoose.Schema({
-  username: String,
-  password: String,
   breakerName: String,
   location: String,
   crew: String,
   bio: String
 });
 Breaker.plugin(URLSlugs('breakerName crew'));
+Breaker.plugin(passportLocalMongoose);
 
 var Jam = new mongoose.Schema({
   name: String,

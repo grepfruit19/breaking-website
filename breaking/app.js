@@ -1,3 +1,7 @@
+require('./db');
+require('./auth'); //Not sure if these guys are placed correctly.
+
+//Express stuff
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -5,11 +9,24 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//Routers
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var register = require('./routes/register');
 
+//Authentication
+var passport = require('passport');
+
 var app = express();
+
+//Session management
+var session = require('express-session');
+var sessionOptions = {
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+};
+app.use(session(sessionOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +39,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//More Authentication
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req,res,next){
+  res.locals.user = req.user;
+  next();
+});
 
 app.use('/', routes);
 app.use('/users', users);
