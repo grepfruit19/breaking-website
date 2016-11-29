@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //More Authentication
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req,res,next){
+app.use(function(req,res,next){ //req.user is defined here!
   res.locals.user = req.user;
   next();
 });
