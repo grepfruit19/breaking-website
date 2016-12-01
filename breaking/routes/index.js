@@ -51,9 +51,38 @@ router.get('/breakers', function(req,res,next){
 router.get('/breakers/:slug', function(req,res,next){
   var slug = req.params.slug;
   Breaker.findOne({slug: slug}, function(err,breaker,count){
-    console.log(breaker);
-    var breakerName = breaker.breakerName;
-    res.render('breaker-page', breaker);
+    if (req.user!==undefined && req.user.username===breaker.username){
+      console.log("Okay");
+      res.render('breaker-page', {breaker: breaker, currentUser: true});
+    }
+    else{
+      console.log("Nokay");
+      res.render('breaker-page', {breaker: breaker, currentUser:false});
+    }
+  });
+});
+
+router.get('/breakers/:slug/edit', function(req,res,next){
+  var slug = req.params.slug;
+  Breaker.findOne({slug: slug}, function(err,breaker,count){
+    if (req.user!==undefined && req.user.username===breaker.username){
+      res.render('breaker-edit', breaker);
+    }
+    else{
+      res.render('error', {message: "You don't have permission for this"});
+    }
+  });
+});
+
+router.post('/breakers/:slug/edit-submit', function(req,res,next){
+  var slug = req.params.slug;
+  var updateParams = {
+    breakerName: req.body.breakerName,
+    location: req.body.location,
+    bio: req.body.bio
+  }
+  Breaker.update({slug: slug}, updateParams, function(err,breaker){
+    res.redirect('/breakers/' + slug);
   });
 });
 
@@ -103,8 +132,8 @@ router.post('/register/process-event', function(req,res,next){
       res.redirect('/events');
     }
     else{
+      console.log(err);
       console.log("Error processing event");
-      return handleError(err);
     }
   });
 });

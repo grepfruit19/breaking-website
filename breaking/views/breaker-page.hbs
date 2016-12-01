@@ -1,4 +1,9 @@
-<h2>Breaker page for {{breakerName}}</h2>
-Crew: {{crew}}<br>
-Location: {{location}}<br>
-Bio: {{bio}}<br>
+<h2>Breaker page for {{breaker.breakerName}}</h2>
+Crew: {{breaker.crew}}<br>
+Location: {{breaker.location}}<br>
+Bio: {{breaker.bio}}<br>
+
+{{#if currentUser}}
+Test
+<a href="/breakers/{{breaker.slug}}/edit">Edit Info</a>
+{{/if}}
