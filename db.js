@@ -39,6 +39,7 @@ if (process.env.NODE_ENV == 'PRODUCTION') {
 } else {
  // if we're not in PRODUCTION mode, then use
  dbconf = 'mongodb://heroku_fb94bkrv:ta8fdokhuhbhjl59l6soq4vbhf@ds127998.mlab.com:27998/heroku_fb94bkrv';
+ //dbconf = 'mongodb://localhost/breaking';
 }
 
 mongoose.model('Breaker', Breaker);
