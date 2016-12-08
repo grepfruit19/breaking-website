@@ -17,6 +17,33 @@ router.get('/', function(req, res, next) {
   res.render('home', { title: 'Express' });
 });
 
+router.get('/reqs', function(req,res,next){
+  var type = req.query.process;
+  var array = req.query.list;
+  if (array!==undefined && type!==undefined){
+    array = array.split(',');
+    var modArray = [];
+    if (type==='double'){
+      modArray = array.map(function(element){
+        return element*2;
+      });
+    } else if (type==='remove'){
+      modArray = array.filter(function(element){
+        if (element>20){ return element; }
+      });
+    } else if (type==='lowest'){
+      var lowest = push.array.reduce(function(a,b){
+        return Math.min(a,b);
+      });
+      modArray[0] = lowest;
+    }
+    res.render('reqs', {number: modArray});
+  }
+  else{
+    res.render('reqs');
+  }
+});
+
 router.get('/events', function(req,res,next){
   var filter = req.query.filter;
   //console.log(req.query.filter);
