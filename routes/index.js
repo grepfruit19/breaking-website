@@ -32,7 +32,7 @@ router.get('/reqs', function(req,res,next){
         if (element>20){ return element; }
       });
     } else if (type==='lowest'){
-      var lowest = push.array.reduce(function(a,b){
+      var lowest = array.reduce(function(a,b){
         return Math.min(a,b);
       });
       modArray[0] = lowest;
