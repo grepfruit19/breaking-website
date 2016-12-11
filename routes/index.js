@@ -44,22 +44,6 @@ router.get('/reqs', function(req,res,next){
   }
 });
 
-router.get('/events', function(req,res,next){
-  var filter = req.query.filter;
-  //console.log(req.query.filter);
-  if (req.query.filter===undefined){
-    filter = {};
-  }
-  else{
-    filter = {name: filter};
-  }
-  //console.log(filter);
-  Jam.find(filter, function(err,jamList,count){
-    res.render('events', {jam: jamList});
-  });
-  res.render('events');
-});
-
 router.get('/breakers', function(req,res,next){
   var filter = req.query.filter;
   //console.log(req.query.filter);
@@ -137,6 +121,21 @@ router.post('/register/process-breaker',function(req,res,next){
         });
       }
     });
+});
+
+router.get('/events', function(req,res,next){
+  var filter = req.query.filter;
+  //console.log(req.query.filter);
+  if (req.query.filter===undefined){
+    filter = {};
+  }
+  else{
+    filter = {name: filter};
+  }
+  //console.log(filter);
+  Jam.find(filter, function(err,jamList,count){
+    res.render('events', {jam: jamList});
+  });
 });
 
 router.get('/register/event', function(req,res,next){
