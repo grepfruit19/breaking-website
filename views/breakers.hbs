@@ -5,8 +5,8 @@
   <input type="submit">
 </form>
 
-<ul>
+<ul class="list-box">
 {{#each breaker}}
-  <li><a href="/breakers/{{this.slug}}">{{this.breakerName}}</a> - {{this.location}} - {{this.crew}}</li>
+<li class="list-item"><a href="/breakers/{{this.slug}}">{{this.breakerName}}</a> - {{this.location}} - {{this.crew}}</li>
 {{/each}}
 </ul>
