@@ -16,12 +16,13 @@ var Jam = new mongoose.Schema({
   address: String,
   eventDate: String,
   prizeMoney: String,
+  admins: [Breaker],
   judges: [Breaker],
   participants: [Breaker],
   format: String,
   details: String
 });
-Jam.plugin(URLSlugs('name eventDate'));
+Jam.plugin(URLSlugs('name'));
 
 // is the environment variable, NODE_ENV, set to PRODUCTION?
 if (process.env.NODE_ENV == 'PRODUCTION') {

@@ -11,8 +11,9 @@ var bodyParser = require('body-parser');
 
 //Routers
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var breakers = require('./routes/breakers');
 var register = require('./routes/register');
+var events = require('./routes/events');
 
 //Authentication
 var passport = require('passport');
@@ -49,8 +50,9 @@ app.use(function(req,res,next){ //req.user is defined here!
 });
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/breakers', breakers);
 app.use('/register', register);
+app.use('/events', events);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

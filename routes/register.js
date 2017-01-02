@@ -46,9 +46,9 @@ router.post('/process-event', function(req,res,next){
     eventDate: req.body.date,
     prizeMoney: req.body.prizeMoney,
     format: req.body.format,
-    details: req.body.details
+    details: req.body.details,
+    admin: req.user
   });
-  console.log("hello", newEvent);
   newEvent.save(function(err,evt,count){
     if (err===null){
       console.log("Saved event");
