@@ -27,7 +27,16 @@ router.get('/', function(req,res,next){
 router.get('/:slug', function(req,res,next){
   var slug = req.params.slug;
   Jam.findOne({slug: slug}, function(err,jam,count){
-      res.render('breaker-page', {jam: jam});
+    var admins = jam.admins;
+    console.log(admins);
+    var isAdmin=false;
+    if (req.user!==undefined){
+      admins.forEach(function(element){
+        if (element===req.user){ isAdmin=true; }
+      });
+    }
+    console.log(isAdmin);
+    res.render('event-page', {jam: jam, isAdmin: isAdmin});
   });
 });
 

@@ -1,0 +1,11 @@
+<h2>Event page for {{jam.name}}</h2>
+Address: {{jam.address}}<br>
+Details: {{jam.details}}<br>
+Judges: (To be added)<br>
+List of people who signed up (To be added)<br>
+Sign up: (To be added)<br>
+Admin: {{#each jam.admins}} <a href="/breakers/{{this.slug}}">{{this.breakerName}}</a> {{/each}}
+
+{{#if isAdmin}}
+<a href="/breakers/{{breaker.slug}}/edit">Edit Info</a>
+{{/if}}

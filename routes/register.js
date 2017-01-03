@@ -40,6 +40,7 @@ router.get('/event', function(req,res,next){
 });
 
 router.post('/process-event', function(req,res,next){
+    console.log(req.user);
     var newEvent = Jam({
     name: req.body.name,
     address: req.body.address,
@@ -47,7 +48,7 @@ router.post('/process-event', function(req,res,next){
     prizeMoney: req.body.prizeMoney,
     format: req.body.format,
     details: req.body.details,
-    admin: req.user
+    admins: req.user
   });
   newEvent.save(function(err,evt,count){
     if (err===null){

@@ -7,6 +7,6 @@
 
 <ul>
 {{#each jam}}
-  <li>{{this.name}} - {{this.address}} - {{this.eventDate}}</li>
+  <li><a href="/events/{{this.slug}}">{{this.name}}</a> - {{this.address}} - {{this.eventDate}}</li>
 {{/each}}
 </ul>
