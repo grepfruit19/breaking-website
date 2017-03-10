@@ -24,6 +24,7 @@ router.get('/', function(req,res,next){
   });
 });
 
+//TODO: isAdmin is not working atm. 
 router.get('/:slug', function(req,res,next){
   var slug = req.params.slug;
   Jam.findOne({slug: slug}, function(err,jam,count){

@@ -1,5 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow-x:hidden;
 }
 
 a {
@@ -17,10 +18,31 @@ ul.list-box{
 }
 
 li.list-item{
-  border-color: #ccffff;
+  border-color: black;
   border-radius: 3px;
   border-style: solid;
   margin: 50px;
   padding: 20px;
   width: 70%;
+}
+
+.jumbotron{
+  color: white;
+}
+
+.jumbotron-background{
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 0;
+  position: relative;
+}
+
+.jumbotron-header{
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index:1;
+  color: #fff;
+  top: 200px;
 }
